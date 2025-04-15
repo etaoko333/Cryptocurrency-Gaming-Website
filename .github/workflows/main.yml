@@ -110,11 +110,11 @@ jobs:
 
       - name: Stop and Remove Old Container
         run: |
-          docker stop crypto-gaming-website || true
-          docker rm crypto-gaming-website || true
+          docker stop cryptocurrency-gaming-website || true
+          docker rm cryptocurrency-gaming-website || true
 
       - name: Run New Container
-        run: docker run -d --name crypto-gaming-website -p 3000:80 $DOCKER_IMAGE:latest
+        run: docker run -d --name cryptocurrency-gaming-website -p 3000:80 $DOCKER_IMAGE:latest
 
       - name: Configure AWS Credentials (Optional)
         env:
