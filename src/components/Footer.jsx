@@ -54,7 +54,7 @@ export default function Footer() {
         })}
       </div>
       <div className="lower__footer">
-        <span>&copy; 2022 Earthium</span>
+        <span>&copy; 2025 Earthium</span>
         <ul>
           <li>Facebook</li>
           <li>Twitter</li>
