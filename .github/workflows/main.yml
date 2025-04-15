@@ -85,21 +85,6 @@ jobs:
           docker-scout quickview $DOCKER_IMAGE:latest
           docker-scout cves $DOCKER_IMAGE:latest
 
-  deploy-monitoring:
-    name: Deploy Monitoring Stack
-    runs-on: self-hosted
-    needs: docker
-    steps:
-      - uses: actions/checkout@v4
-      - name: Create monitoring directory
-        run: ssh $SSH_USER@$SSH_HOST "mkdir -p /app/monitoring"
-      - name: Upload monitoring files
-        run: |
-          scp docker-compose.monitoring.yml $SSH_USER@$SSH_HOST:/app/monitoring/docker-compose.yml
-          scp prometheus.yml $SSH_USER@$SSH_HOST:/app/monitoring/
-      - name: Start monitoring stack
-        run: ssh $SSH_USER@$SSH_HOST "cd /app/monitoring && docker-compose pull && docker-compose up -d"
-  
   deploy:
     name: Deploy to Container
     runs-on: self-hosted
@@ -122,3 +107,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-west-1
         run: echo "AWS credentials configured"
+
+      - name: Start Prometheus + Grafana
+        run: |
+          cd ~/cryptocurrency-gaming-website/monitoring
+          docker compose up -d
+
+      - name: Health Check /metrics
+        run: |
+          sleep 10
+          curl --fail http://localhost:3000/metrics || exit 1
