@@ -3,40 +3,49 @@ version: '3.8'
 services:
   prometheus:
     image: prom/prometheus
-    ports:
+    ports: 
       - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
+    volumes: 
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    command: 
       - "--config.file=/etc/prometheus/prometheus.yml"
-    networks:
+    networks: 
       - monitor-net
 
   grafana:
     image: grafana/grafana
-    ports:
-      - "3001:3000"  # 3001 on host maps to Grafana's 3000
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin123
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    networks:
+    ports: 
+      - "3001:3000"  # You can access Grafana at http://localhost:3001
+    environment: 
+      - GF_SECURITY_ADMIN_PASSWORD=admin123  # You can change this in prod
+    volumes: 
+      - "grafana-storage:/var/lib/grafana"
+    networks: 
       - monitor-net
 
   node-exporter:
     image: prom/node-exporter
-    ports:
+    ports: 
       - "9100:9100"
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
+    volumes: 
+      - "/proc:/host/proc:ro"
+      - "/sys:/host/sys:ro"
+      - "/:/rootfs:ro"
+    command: 
       - "--path.procfs=/host/proc"
       - "--path.sysfs=/host/sys"
       - "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)"
-    networks:
+    networks: 
       - monitor-net
+
+  # ✅ IMPORTANT: If you want to scrape your app metrics, define your app container like this:
+  cryptocurrency-gaming-website:
+    image: your-dockerhub-username/crypto-gaming-website:latest
+    ports: 
+      - "80:80"
+    networks: 
+      - monitor-net
+    # 🧠 Make sure this app exposes /metrics endpoint for Prometheus to scrape
 
 networks:
   monitor-net:
