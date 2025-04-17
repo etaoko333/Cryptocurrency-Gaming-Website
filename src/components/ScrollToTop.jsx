@@ -8,21 +8,16 @@ export default function ScrollToTop() {
   });
   return (
   <div>
- <button
-  onClick={scrollToTop}
-  className={`${visible ? "block" : "none"}`}
-  aria-label="Scroll to top"
->
-  ⬆️
-</button>
+  <button
+    onClick={scrollToTop}
+    className={`${visible ? "block" : "none"}`}
+    aria-label="Scroll to top"
+  >
+    <AiOutlineArrowUp />
+  </button>
 </div>
-
-<AiOutlineArrowUp />
-</a>
-</Div>
 );
 }
-
 
 const Div = styled.div`
   .none {
