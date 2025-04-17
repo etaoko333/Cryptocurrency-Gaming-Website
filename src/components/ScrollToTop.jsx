@@ -7,13 +7,22 @@ export default function ScrollToTop() {
     window.pageYOffset > 100 ? setVisible(true) : setVisible(false);
   });
   return (
-    <Div>
-      <a href="#" className={`${visible ? "block" : "none"}`}>
-        <AiOutlineArrowUp />
-      </a>
-    </Div>
-  );
+  <div>
+ <button
+  onClick={scrollToTop}
+  className={`${visible ? "block" : "none"}`}
+  aria-label="Scroll to top"
+>
+  ⬆️
+</button>
+</div>
+
+<AiOutlineArrowUp />
+</a>
+</Div>
+);
 }
+
 
 const Div = styled.div`
   .none {
