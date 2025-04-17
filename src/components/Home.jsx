@@ -21,7 +21,7 @@ export default function Home() {
         <Button text="Join Our Discord" icon={<RiGroupLine />} />
       </div>
       <div className="image">
-        <img src={image} alt="Home Image" />
+        <img src="home.jpg" alt="Homepage banner with gaming avatars" />
       </div>
     </Section>
   );
