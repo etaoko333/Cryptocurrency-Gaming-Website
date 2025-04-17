@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineArrowUp } from "react-icons/ai";
-export default function () {
+export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
   window.addEventListener("scroll", () => {
     window.pageYOffset > 100 ? setVisible(true) : setVisible(false);
