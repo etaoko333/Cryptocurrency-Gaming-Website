@@ -1,36 +1,24 @@
-name: CI/CD Pipeline
+name: Build
 
 on:
   push:
     branches:
       - main
 
-env:
-  DOCKER_IMAGE: sholly333/crypto-gaming-website
-  DOCKER_TAG: ${{ github.sha }}
 
 jobs:
-
-  sonar-scan:
-    name: SonarQube Scan
-    runs-on: self-hosted
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
-  build-test:
-    name: Build and Test
-    runs-on: self-hosted
-    needs: sonar-scan
-    steps:
-      - uses: actions/checkout@v4
-
+    
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -55,7 +43,7 @@ jobs:
   docker:
     name: Docker Build and Push
     runs-on: self-hosted
-    needs: build-test
+    
     steps:
       - uses: actions/checkout@v4
 
