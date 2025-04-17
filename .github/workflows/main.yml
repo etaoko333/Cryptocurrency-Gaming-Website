@@ -36,12 +36,7 @@ jobs:
       - name: Build production bundle
         run: yarn build
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4.1.1
-        with:
-          name: build
-          path: build/
-
+      
   docker:
     name: Docker Build and Push
     runs-on: self-hosted
