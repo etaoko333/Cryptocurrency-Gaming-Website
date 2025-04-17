@@ -50,12 +50,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-     
       - name: Docker Build and Push
         run: |
           sudo docker build -t sholly333/crypocurrency-gaming-website:latest .
           sudo docker push sholly333/crypocurrency-gaming-website:latest
-          
       
   deploy:
     name: Deploy to Container
