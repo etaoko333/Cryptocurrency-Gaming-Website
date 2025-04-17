@@ -52,17 +52,16 @@ jobs:
 
       - name: Docker Build and Push
         run: |
-          sudo docker build -t sholly333/crypocurrency-gaming-website:latest .
-          docker tag crypocurrency-gaming-website:latest sholly333/cryptocurrency-gaming-website:latest
-          sudo docker push sholly333/crypocurrency-gaming-website:latest
-
+          sudo docker build -t sholly333/cryptocurrency-gaming-website:latest .
+          sudo docker push sholly333/cryptocurrency-gaming-website:latest
+          
   deploy:
     name: Deploy to Container
     runs-on: self-hosted
     needs: docker
     steps:
       - name: Docker Pull
-        run: docker pull sholly333/crypocurrency-gaming-website:latest
+        run: docker pull sholly333/cryptocurrency-gaming-website:latest
 
       - name: Stop and Remove Old Container
         run: |
@@ -70,8 +69,8 @@ jobs:
           docker rm cryptocurrency-gaming-website || true
 
       - name: Run New Container
-        run: docker run -d --name cryptocurrency-gaming-website -p 3000:80 $DOCKER_IMAGE:latest
-
+        run: docker run -d --name cryptocurrency-gaming-website -p 3000:80 sholly333/cryptocurrency-gaming-website:latest
+         
       - name: Configure AWS Credentials (Optional)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
