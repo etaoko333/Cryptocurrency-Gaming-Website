@@ -16,7 +16,7 @@ export default function Blogs() {
         {images.map((img, index) => {
           return (
             <div className="blog" key={index}>
-              <img src={...} alt="Blog banner" />
+              <img src={imageUrl} alt="Blog Image" />
               <div className="data">
                 <h6>April 16, 2025</h6>
                 <h4>Rightmove Now Offering Click to Purchase Option</h4>
