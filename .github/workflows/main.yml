@@ -58,13 +58,13 @@ jobs:
       - name: Docker Scout Scan (Filesystem)
         run: |
           docker-scout quickview fs://.
-          docker-scout cves fs://.
+          docker-scout cves fs
 
       - name: Docker Build and Push
         run: |
-          docker build -t $DOCKER_IMAGE:latest .
-          docker push $DOCKER_IMAGE:latest
-
+          sudo docker build -t sholly333/crypocurrency-gaming-website:latest .
+          sudo docker push sholly333/crypocurrency-gaming-website:latest
+          
       - name: Docker Scout Scan (Image)
         run: |
           docker-scout quickview $DOCKER_IMAGE:latest
@@ -76,7 +76,7 @@ jobs:
     needs: docker
     steps:
       - name: Docker Pull
-        run: docker pull $DOCKER_IMAGE:latest
+        run: docker pull sholly333/crypocurrency-gaming-website:latest
 
       - name: Stop and Remove Old Container
         run: |
