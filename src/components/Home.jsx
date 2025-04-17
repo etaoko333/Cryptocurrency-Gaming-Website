@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import background from "../assets/background.png";
-import image from "../assets/home.png";
 import Button from "./Button";
 import { RiGroupLine } from "react-icons/ri";
 export default function Home() {
