@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cryptocurrency-gaming-website  # Changed to lowercase
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/etaoko333/cryptocurrency-gaming-website.git  # Your GitHub repo
+    targetRevision: main
+    path: kubernetes  # Folder in your repo containing Kubernetes YAMLs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cryptocurrency-gaming-website
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
