@@ -19,7 +19,7 @@ pipeline {
 
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/etaoko333/SkyeBank-Project.git'
+                https://github.com/etaoko333/cryptocurrency-gaming-website.git'
             }
         }
 
@@ -45,8 +45,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName=Skyebank \
-                        -Dsonar.projectKey=Skyebank'''
+                        -Dsonar.projectName=cryptocurrency-gaming-website \
+                        -Dsonar.projectKey=cryptocurrency-gaming-website'''
                 }
             }
         }
