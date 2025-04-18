@@ -40,7 +40,7 @@ services:
 
   # ✅ IMPORTANT: If you want to scrape your app metrics, define your app container like this:
   cryptocurrency-gaming-website:
-    image: sholly333/crypto-gaming-website:latest
+    image: sholly333/cryptocurrency-gaming-website:latest
     ports: 
       - "80:80"
     networks: 
