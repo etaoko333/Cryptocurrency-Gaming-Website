@@ -12,6 +12,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: cryptocurrency-gaming-website
+    createNamespace: true  # ✅ Ensure the namespace gets created
   syncPolicy:
     automated:
       prune: true
