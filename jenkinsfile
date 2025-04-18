@@ -17,24 +17,11 @@ pipeline {
             }
         }
 
-        stage('Checkout from Git') {
-            steps {
-                https://github.com/etaoko333/cryptocurrency-gaming-website.git'
+        stage('Checkout from Git'){
+            steps{
+                git branch: 'main', url: 'https://github.com/etaoko333/cryptocurrency-gaming-website.git'
             }
         }
-
-        stage('Compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
         stage('Trivy Filesystem Scan') {
             steps {
                 sh 'trivy fs . --format table -o fs.html'
@@ -59,13 +46,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-
-        stage('Docker Build & Push') {
+       stage('Docker Build & Push') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
@@ -87,7 +68,7 @@ pipeline {
                 sh '''
                     docker stop cryptocurrency-gaming-website || true
                     docker rm cryptocurrency-gaming-website || true
-                    docker run -d --name cryptocurrency-gaming-website -p 3000:80 sholly333/cryptocurrency-gaming-website:latest
+                    docker run -d --name cryptocurrency-gaming-website -p 3001:80 sholly333/cryptocurrency-gaming-website:latest
                 '''
             }
         }
