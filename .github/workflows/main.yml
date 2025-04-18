@@ -81,8 +81,7 @@ jobs:
 
       - name: Start Prometheus + Grafana
         run: |
-          cd ~/cryptocurrency-gaming-website/monitoring
-          docker compose up -d
+          docker-compose -f docker-compose.monitoring.yml up -d
 
       - name: Health Check /metrics
         run: |
