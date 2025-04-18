@@ -53,7 +53,8 @@ jobs:
       - name: Docker Build and Push
         run: |
           sudo docker build -t sholly333/cryptocurrency-gaming-website:latest .
-          sudo docker push sholly333/cryptocurrency-gaming-website:latest
+          docker tags sholly333/cryptocurrency-gaming-website:latest
+          docker push sholly333/cryptocurrency-gaming-website:latest
           
   deploy:
     name: Deploy to Container
